@@ -45,28 +45,178 @@ send me a DM to check your pull request
  Wait for my code review.
  */
 
-/*
- copied UDT 1:
- */
 
-/*
- copied UDT 2:
- */
-
-/*
- copied UDT 3:
- */
-
-/*
- new UDT 4:
- */
-
-/*
- new UDT 5:
- */
-
+// ==================================
+// WingTangWong's UDT(s) From Project3
+// ==================================
 #include <iostream>
+using namespace std;
+
+// ==============================
+// Microwave
+struct Microwave
+{
+   // Constructor and destructor declarations 
+   Microwave()
+   {
+      cout << "Microwave constructor!" << endl;
+   }
+   ~Microwave()
+   {
+      cout << "Microwave destructor!" << endl;
+   }
+
+   // 5 properties:
+   // 1) wattage
+   float wattage;
+
+   // 2) plugged in or not
+   bool powerAvailable;
+   // 3) active or not
+   bool active;
+
+   // 4) current settings
+   int powerLevel;
+
+   // 5) time remaining
+   float remainingTime;
+
+   // 3 things it can do:
+   // 1) open/close door
+   void doorChangeState( bool openDoor );
+
+   // 2) set time/power levels
+   void setPowerLevel( int newPowerLevel );
+   void setTimer( int newTimeRemaining );
+
+   // 3) start/stop
+   void startMicrowave();
+
+
+};
+
+// ==============================
+// Smart Power Strip
+struct SmartPowerStrip
+{
+   // Constructor and destructor declarations 
+   SmartPowerStrip()
+   {
+      cout << "SmartPowerStrip constructor!" << endl;
+   }
+   ~SmartPowerStrip()
+   {
+      cout << "SmartPowerStrip destructor!" << endl;
+   }
+   // 5 properties:
+   // 1) network address(ip address/netmask/gateway/dns)
+   struct NetworkConfig
+   {
+      int ipAddress[4];
+      int netmask[4];
+      int gateway[4];
+      bool configured;
+      bool online;
+   };
+
+   // 2) list of individual socket states (on/off)
+
+   struct SocketState
+   {
+      bool enabled;
+      bool toggling;
+      int countDownForToggle;
+      bool somethingPullingPower;
+      double powerConsumed;
+   };
+
+   SocketState sockets[8]; // 8 socket power strip
+
+
+   // 3) stored history of power consumption per socket
+
+   struct PowerDataPoint
+   {
+      double uptime;
+      double powerConsumed=0.0;
+      bool   socketState; // true = on, false = off
+   };
+
+   // 4) stored history of socket state changes
+
+   PowerDataPoint socketHistory[MAX_LOG_LENGTH];
+
+   // 5) stored 'uptime' value
+
+   double uptime;
+
+   // 3 things it can do:
+   // 1) change individual socket state: on-to-off,off-to-on,toggle/bounce
+
+   void socketOff( int socket );
+   void socketOn(  int socket );
+   void socketToggle( int socket, float waitBeforeOn );
+   bool getSocketState( int socket );
+
+   // 2) perform global socket change: all on, all off, all toggle/bounce
+
+   void allSocketOn();
+   void allSocketOff();
+   void allSocketToggle( float waitBeforeOn );
+
+   // 3) reconfigure network settings
+   void setIP( NetworkConfig newConfig );
+
+};
+
+// ==============================
+// Wild Squirrel
+struct WildSquirrel
+{
+   // Constructor and destructor declarations 
+   WildSquirrel()
+   {
+      cout << "WildSquirrel constructor!" << endl;
+   }
+   ~WildSquirrel()
+   {
+      cout << "WildSquirrel destructor!" << endl;
+   }
+
+   // 5 properties:
+   // 1) Number of nuts in mouth
+   int nutsInMouth;
+   // 2) Number of trees visited per hour
+   int treesVisitedPerHour;
+   // 3) Has Jumped In Baby Carriage in Lifetime (bool)
+   bool visitedBabyCarriage;
+   // 4) Is Sprinting(bool)
+   bool isSprinting;
+   // 5) Is Chittering(bool)
+   bool isChittering;
+
+   // 3 things it can do:
+   // 1) Place Nut In Mouth
+   bool placeNutInMouth(); // might fail...
+   // 2) Sprint to random location (inclusive of baby carriages)
+   bool sprintToRandomLocation(); // might fail
+   // 3) Chitter for random length of time.
+   float performChittering(); // returns random value indicating how long chittering will go on for
+
+};
+
+
+// ==========================
+// Two new UDT(s)
+
+
+
+
 int main()
 {
-    std::cout << "good to go!" << std::endl;
+   WildSquirrel ws;
+   Microwave mw;
+   SmartPowerStrip sps;
+
+   std::cout << "good to go!" << std::endl;
 }
